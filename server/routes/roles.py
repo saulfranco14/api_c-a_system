@@ -22,7 +22,7 @@ from server.models.roles import(
 
 router = APIRouter()
 
-@router.get("/", response_description="Roles")
+@router.get("/roles", response_description="Roles")
 async def get_roles():
     roles = await all_roles()
     print("ROLES->", roles)
@@ -30,7 +30,7 @@ async def get_roles():
         return ResponseModel(roles, "Roles exitosamente")
     return ResponseModel(roles, "Sin Roles")
 
-@router.post("/create", response_description="Creación del rol")
+@router.post("/role/create", response_description="Creación del rol")
 async def create_role(role: RolSchema = Body(...)):
     role      = jsonable_encoder(role)
     new_role  = await add_role(role)
@@ -38,14 +38,14 @@ async def create_role(role: RolSchema = Body(...)):
         return ResponseModel(new_role, "Se ha creado el rol exitosamente")
     return ErrorResponseModel("Ocurrió un problema.", 404, "Intente más tarde" )
 
-@router.get("/{id}", response_description="role by id")
+@router.get("/role/{id}", response_description="role by id")
 async def get_role_data(id):
     role = await id_role(id)
     if role:
         return ResponseModel(role, "Role Exitoso")
     return ErrorResponseModel("Ocurrió un problema.", 404, "No existe el rol.")
 
-@router.put("/{id}")
+@router.put("/role/update/{id}")
 async def update_role_data(id: str, req: UpdateRoleModel = Body(...)):
     req = {k: v for k, v in req.dict().items() if v is not None}
     updated_role = await update_role(id, req)
@@ -56,7 +56,7 @@ async def update_role_data(id: str, req: UpdateRoleModel = Body(...)):
         )
     return ErrorResponseModel("Ocurrió un problema.", 404, "Ocurrió un problema al actualizar el rol")
 
-@router.delete("/{id}", response_description="Rol eliminado de la base de datos")
+@router.delete("/role/delete/{id}", response_description="Rol eliminado de la base de datos")
 async def delete_role_data(id: str):
     deleted_role = await delete_role(id)
     if deleted_role:

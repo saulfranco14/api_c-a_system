@@ -22,14 +22,14 @@ from server.models.users import(
 
 router = APIRouter()
 
-@router.get("/", response_description="Usuarios")
+@router.get("/users", response_description="Usuarios")
 async def get_users():
     users = await all_users()
     if users:
         return ResponseModel(users, "Usuarios exitosamente")
     return ResponseModel(users, "Sin Usuarios")
 
-@router.post("/create", response_description="Creación del usuario")
+@router.post("/user/create", response_description="Creación del usuario")
 async def create_user(user: UsersSchema = Body(...)):
     user      = jsonable_encoder(user)
     new_user  = await add_user(user)
@@ -37,14 +37,14 @@ async def create_user(user: UsersSchema = Body(...)):
         return ResponseModel(new_user, "Se ha creado el usuario exitosamente")
     return ErrorResponseModel("Ocurrió un problema.", 404, "Intente más tarde" )
 
-@router.get("/{id}", response_description="User by id")
+@router.get("/user/{id}", response_description="User by id")
 async def get_user_data(id):
     user = await id_user(id)
     if user:
         return ResponseModel(user, "Usuario Exitoso")
     return ErrorResponseModel("Ocurrió un problema.", 404, "No existe el usuario.")
 
-@router.put("/{id}")
+@router.put("/user/update/{id}")
 async def update_user_data(id: str, req: UpdateUserModel = Body(...)):
     req = {k: v for k, v in req.dict().items() if v is not None}
     updated_user = await update_user(id, req)
@@ -55,7 +55,7 @@ async def update_user_data(id: str, req: UpdateUserModel = Body(...)):
         )
     return ErrorResponseModel("Ocurrió un problema.", 404, "Ocurrió un problema al actualizar el usuario")
 
-@router.delete("/{id}", response_description="Usuario eliminado de la base de datos")
+@router.delete("/user/delete/{id}", response_description="Usuario eliminado de la base de datos")
 async def delete_user_data(id: str):
     deleted_user = await delete_user(id)
     if deleted_user:
