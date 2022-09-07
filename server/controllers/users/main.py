@@ -3,7 +3,7 @@ from    bson.objectid       import ObjectId
 
 
 # Connect to Mongo
-user_collection = Database("c_a_api")
+user_collection = Database("users")
 
 def user_helper(user) ->  dict:
 

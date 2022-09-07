@@ -3,7 +3,7 @@ from    bson.objectid       import ObjectId
 
 
 # Connect to Mongo
-role_collection = Database("c_a_api")
+role_collection = Database("roles")
 
 def role_helper(role) ->  dict:
 

@@ -13,7 +13,7 @@ class RolSchema( BaseModel ):
                 "name_rol" : "admin",
                 "description_rol" : "Rol for administrative in the enterprise",
                 "url_rol" : "admin/dashboard",
-                "menus_rol" : ["users", "dashboard", "roles"]
+                "menu_rol" : ["users", "dashboard", "roles"]
             }
         }
 
@@ -29,6 +29,6 @@ class UpdateRoleModel(BaseModel):
                 "name_rol" : "admin",
                 "description_rol" : "Rol for administrative in the enterprise",
                 "url_rol" : "admin/dashboard",
-                "menus_rol" : ["users", "roles"]
+                "menu_rol" : ["users", "roles"]
             }
         }
