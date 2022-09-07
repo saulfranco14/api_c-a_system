@@ -2,8 +2,8 @@ import  motor.motor_asyncio
 import  os
 from    decouple import  config
 
-Mongo_Details   = config("MONGODB_URL")
-client          = motor.motor_asyncio.AsyncIOMotorClient(Mongo_Details)
+MONGO_DETAILS   = config("MONGODB_URL")
+client          = motor.motor_asyncio.AsyncIOMotorClient(MONGO_DETAILS)
 database        = client.c_a_api
 
 def Database(table):
