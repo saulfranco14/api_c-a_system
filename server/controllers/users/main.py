@@ -9,17 +9,17 @@ def user_helper(user) ->  dict:
 
     key_user            = list(user.keys())
     active_user         = None
-    status_civil_user   = None
+    password_user       = None
 
     if not 'active_user' in key_user:
         active_user
     else:
         active_user = user['active_user']
 
-    if not 'status_civil_user' in key_user:
-        status_civil_user
+    if not 'password_user' in key_user:
+        password_user
     else:
-        status_civil_user = user['status_civil_user']
+        password_user = user['password_user']
 
     return {
         "id_user"                        : str(user["_id"]),
@@ -28,7 +28,7 @@ def user_helper(user) ->  dict:
         "last_name_user"                 : str(user["last_name_user"]),
         "email_user"                     : str(user["email_user"]),
         "id_rol"                         : int(user["id_rol"]),
-        "status_civil_user"              : status_civil_user,
+        "password_user"                  : password_user,
         "active_user"                    : active_user
     }
 
