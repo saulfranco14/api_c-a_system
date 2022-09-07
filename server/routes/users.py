@@ -50,7 +50,7 @@ async def update_user_data(id: str, req: UpdateUserModel = Body(...)):
     updated_user = await update_user(id, req)
     if updated_user:
         return ResponseModel(
-            "User with ID: {} ha sido actualizado correctamento, ID:".format(id),
+            "Usuario con el ID: {} ha sido actualizado correctamento.".format(id),
             "actualizado",
         )
     return ErrorResponseModel("Ocurrió un problema.", 404, "Ocurrió un problema al actualizar el usuario")

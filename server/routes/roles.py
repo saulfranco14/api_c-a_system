@@ -51,12 +51,12 @@ async def update_role_data(id: str, req: UpdateRoleModel = Body(...)):
     updated_role = await update_role(id, req)
     if updated_role:
         return ResponseModel(
-            "role with ID: {} ha sido actualizado correctamento, ID:".format(id),
+            "El rol con el ID: {} ha sido actualizado correctamento.".format(id),
             "actualizado",
         )
     return ErrorResponseModel("Ocurrió un problema.", 404, "Ocurrió un problema al actualizar el rol")
 
-@router.delete("/{id}", response_description="Role eliminado de la base de datos")
+@router.delete("/{id}", response_description="Rol eliminado de la base de datos")
 async def delete_role_data(id: str):
     deleted_role = await delete_role(id)
     if deleted_role:
