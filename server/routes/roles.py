@@ -25,6 +25,7 @@ router = APIRouter()
 @router.get("/", response_description="Roles")
 async def get_roles():
     roles = await all_roles()
+    print("ROLES->", roles)
     if roles:
         return ResponseModel(roles, "Roles exitosamente")
     return ResponseModel(roles, "Sin Roles")
