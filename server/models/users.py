@@ -8,7 +8,7 @@ class UsersSchema( BaseModel ):
     phone_user          : str               = Field(...)
     email_user          : EmailStr          = Field(...)
     id_rol              : str               = Field(...)
-    passsword_user      : Optional[str]
+    password_user       : Optional[str]
 
     class Config:
         schema_extra = {
@@ -18,7 +18,7 @@ class UsersSchema( BaseModel ):
                 "last_name_user"    : "Rentería",
                 "phone_user"        : '5585999485',
                 "email_user"        : "fars_9301@hotmail.com",
-                "passsword_user"    : "chelsea",
+                "password_user"     : "chelsea",
                 "id_rol"            : "users",
             }
         }
@@ -28,7 +28,7 @@ class UpdateUserModel(BaseModel):
     first_name_user     : Optional[str]
     last_name_user      : Optional[str]
     email_user          : Optional[str]
-    passsword_user      : Optional[str]
+    password_user       : Optional[str]
     id_rol              : Optional[str]
     phone_user          : Optional[str]
 
@@ -40,7 +40,7 @@ class UpdateUserModel(BaseModel):
                 "last_name_user"    : "Rentería",
                 "phone_user"        : '5585999485',
                 "email_user"        : "fars_9301@hotmail.com",
-                "passsword_user"    : "chelsea",
+                "password_user"     : "chelsea",
                 "id_rol"            : "admin",
             }
         }

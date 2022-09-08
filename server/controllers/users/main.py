@@ -1,5 +1,7 @@
 from    server.config.db    import Database
 from    bson.objectid       import ObjectId
+import  bcrypt
+
 
 
 # Connect to Mongo
@@ -11,6 +13,7 @@ def user_helper(user) ->  dict:
     active_user         = None
     password_user       = None
     phone_user          = None
+    hash                = None
 
     if not 'active_user' in key_user:
         active_user
@@ -21,6 +24,9 @@ def user_helper(user) ->  dict:
         password_user
     else:
         password_user = user['password_user']
+        bytes     = password_user.encode('utf-8')
+        salt      = bcrypt.gensalt()
+        hash      = bcrypt.hashpw(bytes, salt)
 
     if not 'phone_user' in key_user:
         phone_user
@@ -35,7 +41,7 @@ def user_helper(user) ->  dict:
         "email_user"                     : str(user["email_user"]),
         "phone_user"                     : phone_user,
         "id_rol"                         : str(user["id_rol"]),
-        "password_user"                  : password_user,
+        "password_user"                  : hash,
         "active_user"                    : active_user
     }
 
@@ -46,6 +52,7 @@ async def all_users():
     return users
 
 async def add_user(user_data: dict) -> dict:
+
     user      = await user_collection.insert_one(user_data)
     new_user  = await user_collection.find_one({"_id": user.inserted_id})
     return user_helper(new_user)
